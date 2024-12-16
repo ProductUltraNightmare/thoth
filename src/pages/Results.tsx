@@ -126,9 +126,9 @@ const Results = () => {
 
   return (
     <div className="container mx-auto py-8 px-4">
-      <div className="flex gap-8">
+      <div className="flex flex-col lg:flex-row gap-8">
         {/* Sidebar with history */}
-        <div className="w-64 shrink-0">
+        <div className="w-full lg:w-64 shrink-0">
           <Button
             variant="ghost"
             onClick={() => navigate("/")}
@@ -199,8 +199,8 @@ const Results = () => {
         {/* Main content */}
         <div className="flex-1 min-w-0">
           {/* Document Header */}
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6">
+            <div className="flex items-center gap-2 mb-2 sm:mb-0">
               {isEditingHeader ? (
                 <Input
                   value={editingName}
@@ -240,7 +240,7 @@ const Results = () => {
           </div>
 
           <Tabs defaultValue="content" className="w-full">
-            <TabsList className="w-full justify-start border-b rounded-none bg-transparent h-auto p-0">
+            <TabsList className="w-full justify-start border-b rounded-none bg-transparent h-auto p-0 flex-wrap">
               <TabsTrigger value="content" className="tab-trigger">
                 Content
               </TabsTrigger>
