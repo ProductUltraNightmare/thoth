@@ -3,7 +3,6 @@ import { useDropzone } from "react-dropzone";
 import { Upload } from "lucide-react";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
-import { Button } from "./ui/button";
 
 interface FileUploadProps {
   onFileSelect: (file: File) => void;
@@ -57,7 +56,7 @@ export const FileUpload = ({ onFileSelect }: FileUploadProps) => {
     }
   }, [onFileSelect, navigate]);
 
-  const { getRootProps, getInputProps, open } = useDropzone({
+  const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: {
       'application/pdf': ['.pdf'],
@@ -66,29 +65,24 @@ export const FileUpload = ({ onFileSelect }: FileUploadProps) => {
     },
     onDragEnter: () => setIsDragging(true),
     onDragLeave: () => setIsDragging(false),
-    multiple: false,
-    noClick: true
+    multiple: false
   });
 
   return (
-    <div className="space-y-4">
-      <div 
-        {...getRootProps()} 
-        className={`drop-zone h-32 flex items-center justify-center ${isDragging ? 'active' : ''}`}
-      >
-        <input {...getInputProps()} />
-        <div className="flex items-center gap-2 text-muted-foreground">
-          <Upload className="w-5 h-5" />
-          <p className="text-sm">Drop your file here</p>
+    <div 
+      {...getRootProps()} 
+      className={`drop-zone ${isDragging ? 'active' : ''}`}
+    >
+      <input {...getInputProps()} />
+      <div className="flex flex-col items-center gap-4 text-center">
+        <Upload className="w-12 h-12 text-muted-foreground" />
+        <div>
+          <p className="text-lg font-medium">Drop your file here or click to upload</p>
+          <p className="text-sm text-muted-foreground mt-1">
+            Support for PDF, TXT, and JSON files
+          </p>
         </div>
       </div>
-      <Button 
-        onClick={open}
-        variant="outline"
-        className="w-full"
-      >
-        Choose File
-      </Button>
     </div>
   );
 };
